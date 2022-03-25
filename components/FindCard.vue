@@ -38,11 +38,7 @@
         </div>
       </div>
     </Transition>
-    <button
-      class="button button-primary"
-      :disabled="isLoading"
-      @click="search"
-    >
+    <button class="button button-primary" :disabled="isLoading" @click="search">
       探す
       <span
         v-if="isLoading"

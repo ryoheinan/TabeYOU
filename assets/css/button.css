@@ -1,4 +1,4 @@
-.button{
+.button {
   display: flex;
   justify-content: center;
   align-items: center;
@@ -9,15 +9,15 @@
   line-height: 1.42;
   cursor: pointer;
   -webkit-user-select: none;
-     -moz-user-select: none;
-      -ms-user-select: none;
-          user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
   border: none;
   border-radius: 25px;
   box-shadow: 0 0.2rem 0.4rem rgb(0 0 0 / 14%);
 }
 
-.button-primary{
+.button-primary {
   color: #fff;
   background-color: #ff9e1f;
 }
