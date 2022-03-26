@@ -47,7 +47,7 @@ export default {
       target: 'http://webservice.recruit.co.jp',
       pathRewrite: { '^/api/': '/' },
       onProxyReq: (proxyReq) => {
-        proxyReq.path += '&key=' + process.env.API_KEY
+        proxyReq.path +=`&format=json&key=${process.env.API_KEY}`
       },
     },
   },
