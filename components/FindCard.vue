@@ -47,6 +47,15 @@
         aria-hidden="true"
       ></span>
     </button>
+    <p class="text-muted hotpepper">
+      Powered by
+      <a
+        href="http://webservice.recruit.co.jp/"
+        target="_blank"
+        rel="noopener noreferrer"
+        >ホットペッパー Webサービス</a
+      >
+    </p>
   </div>
 </template>
 
@@ -158,5 +167,11 @@ export default defineComponent({
     opacity: 1;
     transform: translateY(0);
   }
+}
+
+.hotpepper {
+  text-align: right;
+  margin: 2rem 0 0 0;
+  font-size: 0.7rem;
 }
 </style>
