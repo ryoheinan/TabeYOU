@@ -2,8 +2,16 @@
 
 body {
   margin: 0;
+  background-color: #f2f2f2;
   font-family: 'Noto Sans JP', 'Noto Sans CJK JP', Roboto, 'Segoe UI',
     'BIZ UDPGothic', 'Helvetica Neue', Arial, Helvetica,
     'Hiragino Kaku Gothic ProN', 'Hiragino Sans', '游ゴシック', 'YuGothic',
     sans-serif;
+}
+
+.msg-area {
+  height: 60vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }

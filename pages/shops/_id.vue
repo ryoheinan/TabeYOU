@@ -2,7 +2,17 @@
   <div>
     <Header />
     <main class="container d-flex justify-content-center">
-      <p v-if="restaurants.errorMsg">{{ restaurants.errorMsg }}</p>
+      <div v-if="restaurants.errorMsg" class="msg-area">
+        <div>
+          <div class="h5 text-center text-danger">エラー!</div>
+          {{ restaurants.errorMsg }}
+        </div>
+      </div>
+      <div v-else-if="restaurants.isLoading" class="msg-area">
+        <div class="spinner-border" role="status">
+          <span class="visually-hidden">Loading...</span>
+        </div>
+      </div>
       <div v-else class="">
         <h1 class="h2">店舗詳細</h1>
         <div v-for="shop in restaurants.shops" :key="shop.id" class="card mb-3">
@@ -19,7 +29,16 @@
           </div>
           <div class="content">
             <p class="h3 card-title">{{ shop.name }}</p>
-            <p>{{ shop.catch }}</p>
+            <p class="mb-2">{{ shop.catch }}</p>
+            <div class="text-md-start text-center mb-4">
+              <a
+                :href="shop.urls.pc"
+                class="button button-primary hotpepper-link"
+                target="_blank"
+                rel="noopener noreferrer"
+                >ホットペッパーでみる</a
+              >
+            </div>
             <dl>
               <dt>種類</dt>
               <dd>{{ shop.genre.name }}</dd>
@@ -115,6 +134,13 @@ export default defineComponent({
   width: 100%;
 }
 
+.hotpepper-link {
+  display: inline-block;
+  text-align: center;
+  font-size: 1rem;
+  width: 12rem;
+}
+
 @media (max-width: 768px) {
   .content {
     margin: 1.25rem 1rem;
@@ -126,7 +152,7 @@ export default defineComponent({
     display: flex;
     justify-content: center;
   }
-  
+
   .card-img-top {
     max-width: 25rem;
     border-top-left-radius: 0;
