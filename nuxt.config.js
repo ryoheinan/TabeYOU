@@ -28,6 +28,15 @@ export default {
     // https://go.nuxtjs.dev/eslint
     '@nuxtjs/eslint-module',
     '@nuxtjs/composition-api/module',
+    [
+      '@nuxtjs/google-fonts',
+      {
+        families: { NotoSansJP: true },
+        display: 'swap',
+        download: true,
+        inject: true,
+      },
+    ],
   ],
 
   // Modules: https://go.nuxtjs.dev/config-modules
@@ -47,7 +56,7 @@ export default {
       target: 'http://webservice.recruit.co.jp',
       pathRewrite: { '^/api/': '/' },
       onProxyReq: (proxyReq) => {
-        proxyReq.path += '&key=' + process.env.API_KEY
+        proxyReq.path += `&format=json&key=${process.env.API_KEY}`
       },
     },
   },
