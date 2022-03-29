@@ -111,7 +111,11 @@ export default defineComponent({
             queryData[item.id] = item.value
           }
           isLoading.value = false
-          router.push({ name: 'explore', query: queryData })
+          router.push({
+            name: 'explore-page',
+            params: { page: 0 },
+            query: queryData,
+          })
         } catch (e) {
           isLoading.value = false
           alert('位置情報が取得できませんでした。')
