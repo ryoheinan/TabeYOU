@@ -90,4 +90,5 @@ sw.*
 *.swp
 
 .vscode
+assets/css/fonts.css
 assets/fonts/**.woff2
