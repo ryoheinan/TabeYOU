@@ -22,9 +22,9 @@
           v-for="shop in restaurants.shops"
           :key="shop.id"
           :to="{ name: 'shops-id', params: { id: shop.id } }"
-          class="card-link"
+          class="card-link-area"
         >
-          <div class="card mb-3">
+          <div class="card mb-4">
             <div class="row g-0">
               <div
                 class="col-md-2 d-flex justify-content-center align-items-center py-2 py-md-0"
@@ -134,12 +134,12 @@ export default defineComponent({
   transform: scale(1.025, 1.025);
 }
 
-.card-link {
+.card-link-area {
   text-decoration: none;
   color: #000000;
 }
 
-.card-link:hover {
+.card-link-area:hover {
   text-decoration: none;
   color: #000000;
 }
