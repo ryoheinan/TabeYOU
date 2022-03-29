@@ -16,7 +16,9 @@
       <div v-else>
         <h1 class="h2">検索一覧</h1>
         <p class="small text-muted">
-          {{ restaurants.resultsAvailable }}件見つかりました。
+          {{ restaurants.resultsAvailable }}件見つかりました（{{
+            parseInt(params.page) + 1
+          }}/{{ Math.floor(restaurants.resultsAvailable / 10) + 1 }}ページ）
         </p>
         <nuxt-link
           v-for="shop in restaurants.shops"
@@ -51,6 +53,43 @@
             </div>
           </div>
         </nuxt-link>
+        <nav
+          class="d-flex justify-content-center"
+          aria-label="ページナビゲーション"
+        >
+          <ul class="pagination">
+            <li
+              class="page-item me-1"
+              :class="{
+                disabled: parseInt(params.page) <= 0,
+              }"
+            >
+              <button
+                class="page-link"
+                aria-label="戻る"
+                @click="pagination('back')"
+              >
+                <span aria-hidden="true">前ページ</span>
+              </button>
+            </li>
+            <li
+              class="page-item ms-1"
+              :class="{
+                disabled:
+                  parseInt(params.page) * 10 + 11 >
+                  restaurants.resultsAvailable,
+              }"
+            >
+              <button
+                class="page-link"
+                aria-label="次へ"
+                @click="pagination('next')"
+              >
+                <span aria-hidden="true">次ページ</span>
+              </button>
+            </li>
+          </ul>
+        </nav>
       </div>
     </main>
   </div>
@@ -62,17 +101,18 @@ import {
   reactive,
   useAsync,
   useContext,
+  useRouter,
 } from '@nuxtjs/composition-api'
 
 export default defineComponent({
   name: 'ExplorePage',
   setup() {
-    const { $axios, query } = useContext()
+    const { $axios, params, query } = useContext()
+    const router = useRouter()
 
     const restaurants = reactive({
       shops: {},
       resultsAvailable: 0,
-      resultsPerPage: 0,
       isLoading: true,
       errorMsg: '',
     })
@@ -97,7 +137,27 @@ export default defineComponent({
       for (const item of paramsItem) {
         result[item] = query.value[item]
       }
+      result.start = parseInt(params.value.page) * 10 + 1
       return result
+    }
+
+    const pagination = (mode) => {
+      if (
+        mode === 'next' &&
+        parseInt(params.value.page) * 10 + 11 <= restaurants.resultsAvailable
+      ) {
+        router.push({
+          name: 'explore-page',
+          params: { page: parseInt(params.value.page) + 1 },
+          query: query.value,
+        })
+      } else if (mode === 'back' && parseInt(params.value.page) > 0) {
+        router.push({
+          name: 'explore-page',
+          params: { page: parseInt(params.value.page) - 1 },
+          query: query.value,
+        })
+      }
     }
 
     useAsync(async () => {
@@ -110,7 +170,6 @@ export default defineComponent({
         } else {
           restaurants.shops = response.results.shop
           restaurants.resultsAvailable = response.results.results_available
-          restaurants.resultsPerPage = response.results.results_returned
         }
       } catch (error) {
         restaurants.errorMsg = 'Failed to get gourmet data.'
@@ -119,12 +178,16 @@ export default defineComponent({
       }
     })
 
-    return { restaurants }
+    return { pagination, restaurants, params }
   },
 })
 </script>
 
 <style scoped>
+.page-link {
+  cursor: pointer;
+}
+
 .card {
   box-shadow: 0 0.2rem 0.4rem rgb(0 0 0 / 14%);
   transition: ease-in-out 0.25s;
