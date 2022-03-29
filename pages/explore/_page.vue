@@ -13,6 +13,15 @@
           <span class="visually-hidden">Loading...</span>
         </div>
       </div>
+      <div
+        v-else-if="parseInt(restaurants.resultsAvailable) === 0"
+        class="msg-area"
+      >
+        <div>
+          <div class="h5 text-center text-danger">Not found!</div>
+          条件に合致するお店が見つかりませんでした。
+        </div>
+      </div>
       <div v-else>
         <h1 class="h2">検索一覧</h1>
         <p class="small text-muted">
