@@ -2,7 +2,9 @@
   <div>
     <Header />
     <client-only>
-      <FindCard class="m-5" />
+      <main class="container d-flex justify-content-center">
+        <FindCard class="find-card" />
+      </main>
     </client-only>
   </div>
 </template>
@@ -14,3 +16,11 @@ export default defineComponent({
   name: 'IndexPage',
 })
 </script>
+
+<style scoped>
+.find-card {
+  margin: 3rem;
+  width: 100%;
+  max-width: 50rem;
+}
+</style>
