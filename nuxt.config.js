@@ -31,7 +31,7 @@ export default {
     [
       '@nuxtjs/google-fonts',
       {
-        families: { NotoSansJP: true },
+        families: { 'Noto Sans JP': true },
         display: 'swap',
         download: true,
         inject: true,
