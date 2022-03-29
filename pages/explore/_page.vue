@@ -62,11 +62,8 @@
             </div>
           </div>
         </nuxt-link>
-        <nav
-          class="d-flex justify-content-center"
-          aria-label="ページナビゲーション"
-        >
-          <ul class="pagination">
+        <nav aria-label="ページナビゲーション">
+          <ul class="d-flex justify-content-center pagination mb-3">
             <li
               class="page-item me-1"
               :class="{
@@ -98,6 +95,9 @@
               </button>
             </li>
           </ul>
+          <div class="d-flex justify-content-center mb-5">
+            <NuxtLink to="/" class="page-link">TOPへ</NuxtLink>
+          </div>
         </nav>
       </div>
     </main>
