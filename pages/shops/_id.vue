@@ -13,9 +13,9 @@
           <span class="visually-hidden">Loading...</span>
         </div>
       </div>
-      <div v-else class="">
+      <div v-else>
         <h1 class="h2">店舗詳細</h1>
-        <div v-for="shop in restaurants.shops" :key="shop.id" class="card mb-3">
+        <div v-for="shop in restaurants.shops" :key="shop.id" class="card mb-5">
           <div class="img-area">
             <img
               :src="shop.photo.pc.l"
@@ -27,7 +27,7 @@
               class="card-img-top"
             />
           </div>
-          <div class="content">
+          <div class="info">
             <p class="h3 card-title">{{ shop.name }}</p>
             <p class="mb-2">{{ shop.catch }}</p>
             <div class="text-md-start text-center mb-4">
@@ -90,7 +90,6 @@ export default defineComponent({
     const restaurants = reactive({
       shops: {},
       resultsAvailable: 0,
-      resultsPerPage: 0,
       isLoading: true,
       errorMsg: '',
     })
@@ -107,7 +106,6 @@ export default defineComponent({
         } else {
           restaurants.shops = response.results.shop
           restaurants.resultsAvailable = response.results.results_available
-          restaurants.resultsPerPage = response.results.results_returned
         }
       } catch (error) {
         restaurants.errorMsg = 'Failed to get gourmet data.'
@@ -122,11 +120,7 @@ export default defineComponent({
 </script>
 
 <style scoped>
-.card {
-  max-width: 50rem;
-}
-
-.content {
+.info {
   margin: 1.25rem;
 }
 
@@ -142,7 +136,7 @@ export default defineComponent({
 }
 
 @media (max-width: 768px) {
-  .content {
+  .info {
     margin: 1.25rem 1rem;
   }
 }
@@ -157,6 +151,10 @@ export default defineComponent({
     max-width: 25rem;
     border-top-left-radius: 0;
     border-top-right-radius: 0;
+  }
+
+  .card {
+    width: 50rem;
   }
 }
 </style>
