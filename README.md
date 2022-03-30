@@ -18,3 +18,6 @@
 Vercel を用いてデプロイをしています。  
 以下の URL からアクセスできます。  
 https://tabe-you.vercel.app
+
+## License
+全ての画像・コンテンツを除きApache License 2.0です。  
